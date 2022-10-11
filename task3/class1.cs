@@ -35,19 +35,19 @@ public class dots
         this.oz = Oz;
     }
 
-    public static dots operator + (dots A, dots B)
+    public static dots operator +(dots A, dots B)
     {
         return new(A.ox + B.ox, A.oy + B.oy, A.oz + B.oz);
     }
-    public static dots operator - (dots A, dots B)
+    public static dots operator -(dots A, dots B)
     {
         return new(A.ox - B.ox, A.oy - B.oy, A.oz - B.oz);
     }
-    public static bool operator / (dots A, dots B)
+    public static bool operator /(dots A, dots B)
     {
         return A.ox / B.ox >= 0 && A.oy / B.oy >= 0;
     }
-    public static double operator * (dots A, dots B)
+    public static double operator *(dots A, dots B)
     {
         return A.ox * B.ox + A.oy * B.oy + A.oz * B.oz;
     }
@@ -60,6 +60,15 @@ public class dots
     public static double Dist(dots z1, dots z2)
     {
         return Math.Sqrt(Math.Pow((z2.Ox - z1.Ox), 2) + Math.Pow((z2.Oy - z1.Oy), 2) + Math.Pow((z2.Oz - z1.Oz), 2));
+    }
+
+    public static double convRad(int x)
+    {
+        return (x * Math.PI) / 180;
+    }
+    public static double convGrad(double x)
+    {
+        return (x * 180) / Math.PI;
     }
 
     public static void Line(dots z1, dots z2)
@@ -76,7 +85,7 @@ public class dots
 
     public static double distStart(dots z1)
     {
-       return Math.Sqrt(Math.Pow((z1.Ox), 2) + Math.Pow((z1.Oy), 2) + Math.Pow((z1.Oz), 2));
+        return Math.Sqrt(Math.Pow((z1.Ox), 2) + Math.Pow((z1.Oy), 2) + Math.Pow((z1.Oz), 2));
     }
 
     public dots SumVec(dots z1, dots z2)
@@ -88,7 +97,7 @@ public class dots
         return z3;
     }
 
-    public static double scalar(dots p1, dots p2)
+    public static double Scalar(dots p1, dots p2)
     {
         return p1.Ox * p2.Ox + p1.Oy * p2.Oy + p1.Oz * p2.Oz;
     }
@@ -112,7 +121,7 @@ public class dots
         return Vec;
     }
 
-    public static bool Equasion3D(dots A, dots B, dots C, dots D)
+    public static bool Equasion(dots A, dots B, dots C, dots D)
     {
         return ((D.ox - A.ox) * ((B.oy - A.oy) * (C.oz - A.oz) - (C.oy - A.oy) * (B.oz - A.oz))
             - (D.oy - A.oy) * ((B.ox - A.ox) * (C.oz - A.oz) - (B.oz - A.oz) * (C.ox - A.ox))
@@ -121,9 +130,14 @@ public class dots
 
     public static double Angle(dots A, dots B)
     {
-        double numerator = A.ox * B.ox + A.oy * B.oy + A.oz * B.oz;
-        double denominator = Math.Sqrt(Math.Pow(A.ox, 2) + Math.Pow(A.oy, 2) + Math.Pow(A.oz, 2)) * Math.Sqrt(Math.Pow(B.ox, 2) + Math.Pow(B.oy, 2) + Math.Pow(B.oz, 2));
-        return Math.Acos(numerator / denominator);
+        double chis = A.ox * B.ox + A.oy * B.oy + A.oz * B.oz;
+        double znam = Math.Sqrt(Math.Pow(A.ox, 2) + Math.Pow(A.oy, 2) + Math.Pow(A.oz, 2)) * Math.Sqrt(Math.Pow(B.ox, 2) + Math.Pow(B.oy, 2) + Math.Pow(B.oz, 2));
+        return Math.Acos(chis / znam);
+    }
+
+    public static double VectorMlp(dots A, dots B)
+    {
+        return (A.ox * B.oy - B.ox * A.oy);
     }
 
 }
