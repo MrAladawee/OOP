@@ -71,9 +71,65 @@ public class dots
         return (x * 180) / Math.PI;
     }
 
-    public static void Line(dots z1, dots z2)
+    public static void Line3D(dots z1, dots z2)
     {
         Console.WriteLine("x - {0} / {1} == y - {2} / {3} == z - {4} / {5}", z1.Ox, z2.Ox - z1.Ox, z1.Oy, z2.Oy - z1.Oy, z1.Oz, z2.Oz - z1.Oz);
+    }
+    
+    public static double[] Line2Dcoef(dots A, dots B)
+    {
+        double[] result = new double[3];
+        result[0] = B.oy - A.oy;
+        result[1] = (B.ox - A.ox) * (-1);
+        result[2] = A.oy*B.ox - B.oy*A.ox;
+        return result;
+    }
+
+    public static bool Intersection2D(double[] Line1, double[] Line2)
+    {
+
+        if (Line1[0]/Line2[0] == Line1[1]/Line2[1])
+        {
+            return false; // parallel
+        }
+
+        else if (Line1[0]*Line2[1] - Line2[0]*Line1[1] == 0 && Line2[2]*Line1[1] - Line1[2]*Line2[1] == 0)
+        {
+            return false; // including
+        }
+
+        return true;
+    }
+
+    public static double IntersectionLine2D(double[] Line1, double[] Line2)
+    {
+        double ResultOx;
+
+        ResultOx = (Line1[2]*Line2[1] - Line2[2]*Line1[1]) / (Line2[0]*Line1[1] - Line1[0]*Line2[1]);
+
+        return ResultOx;
+    }
+
+    public static bool IntersectionBool2D(dots A1, dots A2, dots B1, dots B2)
+    {
+        double[] line1 = Line2Dcoef(A1, A2);
+        double[] line2 = Line2Dcoef(B1, B2);
+
+        if (Intersection2D(line1, line2) == true)
+        {
+
+            double intersectionOx = IntersectionLine2D(line1, line2);
+
+            if (((intersectionOx < A2.ox && intersectionOx > A1.ox) || (intersectionOx < A1.ox && intersectionOx > A2.ox)) &&
+                ((intersectionOx < B2.ox && intersectionOx > B1.ox) || (intersectionOx < B1.ox && intersectionOx > B2.ox)))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        return false;
     }
 
     public static void Plot(dots z1, dots z2, dots z3)
