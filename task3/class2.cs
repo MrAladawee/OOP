@@ -202,5 +202,85 @@ namespace dots_class
                 return false;
         }
 
+        public static bool Intersection2D(_4dots Qr1, _4dots Qr2)
+        {
+
+            // AB1 with another
+            if (
+            dots.IntersectionBool2D(Qr1.A, Qr1.B, Qr2.A, Qr2.B) == true ||
+            dots.IntersectionBool2D(Qr1.A, Qr1.B, Qr2.B, Qr2.C) == true ||
+            dots.IntersectionBool2D(Qr1.A, Qr1.B, Qr2.C, Qr2.D) == true ||
+            dots.IntersectionBool2D(Qr1.A, Qr1.B, Qr2.D, Qr2.A) == true
+            )
+            {
+                return true;
+            }
+
+            // BC1 with another
+            if (
+            dots.IntersectionBool2D(Qr1.B, Qr1.C, Qr2.A, Qr2.B) == true ||
+            dots.IntersectionBool2D(Qr1.B, Qr1.C, Qr2.B, Qr2.C) == true ||
+            dots.IntersectionBool2D(Qr1.B, Qr1.C, Qr2.C, Qr2.D) == true ||
+            dots.IntersectionBool2D(Qr1.B, Qr1.C, Qr2.D, Qr2.A) == true
+            )
+            {
+                return true;
+            }
+
+            // CD1 with another
+            if (
+            dots.IntersectionBool2D(Qr1.C, Qr1.D, Qr2.A, Qr2.B) == true ||
+            dots.IntersectionBool2D(Qr1.C, Qr1.D, Qr2.B, Qr2.C) == true ||
+            dots.IntersectionBool2D(Qr1.C, Qr1.D, Qr2.C, Qr2.D) == true ||
+            dots.IntersectionBool2D(Qr1.C, Qr1.D, Qr2.D, Qr2.A) == true
+            )
+            {
+                return true;
+            }
+
+            // DA1 with another
+            if (
+            dots.IntersectionBool2D(Qr1.D, Qr1.A, Qr2.A, Qr2.B) == true ||
+            dots.IntersectionBool2D(Qr1.D, Qr1.A, Qr2.B, Qr2.C) == true ||
+            dots.IntersectionBool2D(Qr1.D, Qr1.A, Qr2.C, Qr2.D) == true ||
+            dots.IntersectionBool2D(Qr1.D, Qr1.A, Qr2.D, Qr2.A) == true
+            )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool Including2D(_4dots Qr1, _4dots Qr2)
+        {
+            double[] Ox1 = new double[4] { Qr1.A.Ox, Qr1.B.Ox, Qr1.C.Ox, Qr1.D.Ox };
+            double[] Ox2 = new double[4] { Qr2.A.Ox, Qr2.B.Ox, Qr2.C.Ox, Qr2.D.Ox };
+            
+            double[] Oy1 = new double[4] { Qr1.A.Oy, Qr1.B.Oy, Qr1.C.Oy, Qr1.D.Oy };
+            double[] Oy2 = new double[4] { Qr2.A.Oy, Qr2.B.Oy, Qr2.C.Oy, Qr2.D.Oy };
+
+            double minOx1 = Ox1.Min(); double maxOy1 = Oy1.Max();
+            double minOx2 = Ox2.Min(); double maxOy2 = Oy2.Max();
+            double maxOx1 = Ox1.Max(); double minOy1 = Oy1.Min();
+            double maxOx2 = Ox2.Max(); double minOy2 = Oy2.Min();
+
+            if (
+                (((minOx1 > minOx2 && minOx1 < maxOx2) && (maxOx1 > minOx2 && maxOx1 < maxOx2)) &&
+                ((minOy1 > minOy2 && minOy1 < maxOy2) && (maxOy1 > minOy2 && maxOy1 < maxOy2)))
+                ||
+                (((minOx2 > minOx1 && minOx2 < maxOx1) && (maxOx2 > minOx1 && maxOx2 < maxOx1)) &&
+                ((minOy2 > minOy1 && minOy2 < maxOy1) && (maxOy2 > minOy1 && maxOy2 < maxOy1)))
+                &&
+                Intersection2D(Qr1, Qr2) == false
+                )
+            {
+                return true;
+            }
+            
+            return false;
+
+        }
+
     }
 }
