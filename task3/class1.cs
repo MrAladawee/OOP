@@ -110,7 +110,7 @@ public class dots
         return ResultOx;
     }
 
-    public static bool IntersectionBool2D(dots A1, dots A2, dots B1, dots B2)
+    public static bool IntersectionSegments2D(dots A1, dots A2, dots B1, dots B2)
     {
         double[] line1 = Line2Dcoef(A1, A2);
         double[] line2 = Line2Dcoef(B1, B2);
