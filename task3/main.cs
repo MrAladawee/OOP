@@ -38,7 +38,7 @@ double[] line2 = dots.Line2Dcoef(P1, P2);
 //if (dots.Intersection2D(line1, line2) == true)
 //{
 //    Console.WriteLine("Пересечение по Ox = {0}", dots.IntersectionLine2D(line1, line2));
-//    Console.WriteLine("Пересечение прямых отрезков лежит на самих отрезках? (пересекаются ли отрезки): {0}", dots.IntersectionBool2D(O1, O2, P1, P2));
+//    Console.WriteLine("Пересечение прямых отрезков лежит на самих отрезках? (пересекаются ли отрезки): {0}", dots.IntersectionSegments2D(O1, O2, P1, P2));
 //}
 
 Console.WriteLine();
