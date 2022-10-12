@@ -207,10 +207,10 @@ namespace dots_class
 
             // AB1 with another
             if (
-            dots.IntersectionBool2D(Qr1.A, Qr1.B, Qr2.A, Qr2.B) == true ||
-            dots.IntersectionBool2D(Qr1.A, Qr1.B, Qr2.B, Qr2.C) == true ||
-            dots.IntersectionBool2D(Qr1.A, Qr1.B, Qr2.C, Qr2.D) == true ||
-            dots.IntersectionBool2D(Qr1.A, Qr1.B, Qr2.D, Qr2.A) == true
+            dots.IntersectionSegments2D(Qr1.A, Qr1.B, Qr2.A, Qr2.B) == true ||
+            dots.IntersectionSegments2D(Qr1.A, Qr1.B, Qr2.B, Qr2.C) == true ||
+            dots.IntersectionSegments2D(Qr1.A, Qr1.B, Qr2.C, Qr2.D) == true ||
+            dots.IntersectionSegments2D(Qr1.A, Qr1.B, Qr2.D, Qr2.A) == true
             )
             {
                 return true;
@@ -218,10 +218,10 @@ namespace dots_class
 
             // BC1 with another
             if (
-            dots.IntersectionBool2D(Qr1.B, Qr1.C, Qr2.A, Qr2.B) == true ||
-            dots.IntersectionBool2D(Qr1.B, Qr1.C, Qr2.B, Qr2.C) == true ||
-            dots.IntersectionBool2D(Qr1.B, Qr1.C, Qr2.C, Qr2.D) == true ||
-            dots.IntersectionBool2D(Qr1.B, Qr1.C, Qr2.D, Qr2.A) == true
+            dots.IntersectionSegments2D(Qr1.B, Qr1.C, Qr2.A, Qr2.B) == true ||
+            dots.IntersectionSegments2D(Qr1.B, Qr1.C, Qr2.B, Qr2.C) == true ||
+            dots.IntersectionSegments2D(Qr1.B, Qr1.C, Qr2.C, Qr2.D) == true ||
+            dots.IntersectionSegments2D(Qr1.B, Qr1.C, Qr2.D, Qr2.A) == true
             )
             {
                 return true;
@@ -229,10 +229,10 @@ namespace dots_class
 
             // CD1 with another
             if (
-            dots.IntersectionBool2D(Qr1.C, Qr1.D, Qr2.A, Qr2.B) == true ||
-            dots.IntersectionBool2D(Qr1.C, Qr1.D, Qr2.B, Qr2.C) == true ||
-            dots.IntersectionBool2D(Qr1.C, Qr1.D, Qr2.C, Qr2.D) == true ||
-            dots.IntersectionBool2D(Qr1.C, Qr1.D, Qr2.D, Qr2.A) == true
+            dots.IntersectionSegments2D(Qr1.C, Qr1.D, Qr2.A, Qr2.B) == true ||
+            dots.IntersectionSegments2D(Qr1.C, Qr1.D, Qr2.B, Qr2.C) == true ||
+            dots.IntersectionSegments2D(Qr1.C, Qr1.D, Qr2.C, Qr2.D) == true ||
+            dots.IntersectionSegments2D(Qr1.C, Qr1.D, Qr2.D, Qr2.A) == true
             )
             {
                 return true;
@@ -240,10 +240,10 @@ namespace dots_class
 
             // DA1 with another
             if (
-            dots.IntersectionBool2D(Qr1.D, Qr1.A, Qr2.A, Qr2.B) == true ||
-            dots.IntersectionBool2D(Qr1.D, Qr1.A, Qr2.B, Qr2.C) == true ||
-            dots.IntersectionBool2D(Qr1.D, Qr1.A, Qr2.C, Qr2.D) == true ||
-            dots.IntersectionBool2D(Qr1.D, Qr1.A, Qr2.D, Qr2.A) == true
+            dots.IntersectionSegments2D(Qr1.D, Qr1.A, Qr2.A, Qr2.B) == true ||
+            dots.IntersectionSegments2D(Qr1.D, Qr1.A, Qr2.B, Qr2.C) == true ||
+            dots.IntersectionSegments2D(Qr1.D, Qr1.A, Qr2.C, Qr2.D) == true ||
+            dots.IntersectionSegments2D(Qr1.D, Qr1.A, Qr2.D, Qr2.A) == true
             )
             {
                 return true;
