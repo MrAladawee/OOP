@@ -166,7 +166,7 @@ namespace ConsoleApp1
             return Matrix.multiplyMtx(A, B);
         }
 
-        public static Matrix operator *(Matrix A, int B)
+        public static Matrix operator *(Matrix A, double B)
         {
             return Matrix.multiplyVal(A, B);
         }
@@ -235,6 +235,18 @@ namespace ConsoleApp1
         public static double Recieve(Matrix A, int index_n, int index_m)
         {
             return A.matr[index_n, index_m];
+        }
+
+        public static void MatrixCopy(double[,] From, double[,] Where, int size_row, int size_col)
+        {
+            for (int i = 0; i < size_row; i++)
+            {
+                for (int j = 0; j < size_col; j++)
+                {
+                    Where[i,j] = From[i,j];
+                }
+            }
+
         }
 
     }
