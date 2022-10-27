@@ -46,31 +46,56 @@ namespace ConsoleApp1
             this.matr = matr;
         }
 
+        public static void SwapRow(SqMatrix A, int row_1, int row_2)
+        {
+
+            double[] rowTemp = new double[A.n];
+
+            for (int col = 0; col < A.n; col++)
+            {
+                rowTemp[col] = A.matr[row_2, col];
+
+                A.matr[row_2, col] = A.matr[row_1, col];
+                A.matr[row_1, col] = rowTemp[col];
+
+            }
+
+        }
+
         // Determinant
         public static double Det(SqMatrix A)
         {
+            int countOfSwap = 0;
+            SqMatrix Acopy = new SqMatrix(A.n);
+            MatrixCopy(A.matr, Acopy.matr, A.n, A.n);
 
             int row_step = 0; // используется как ID строки относительно которой ведутся преобразования
 
-            for (int col = 0; col < A.n - 1; col++) // перебор всех колонок
+            for (int col = 0; col < Acopy.n - 1; col++) // перебор всех колонок
             {
 
-                for (int row = row_step + 1; row < A.n; row++)
+                for (int row = row_step + 1; row < Acopy.n; row++)
                 {
 
-                    // a[row_step, col] * X - a[row, col] = 0    => a[row_step, col] * X = a[row, col]     x = a[row, col] / a[row_step, col]
-                    double X = A.matr[row, col] / A.matr[row_step, col];
+                    if (Acopy.matr[row_step,col] == 0 && Acopy.matr[row, col] != 0)
+                    {
+                        SwapRow(Acopy, row_step, row);
+                        countOfSwap++;
+                    }
 
-                    for (int col_step = col; col_step < A.n; col_step++)
+                    // a[row_step, col] * X - a[row, col] = 0    => a[row_step, col] * X = a[row, col]     x = a[row, col] / a[row_step, col]
+                    double X = Acopy.matr[row, col] / Acopy.matr[row_step, col];
+
+                    for (int col_step = col; col_step < Acopy.n; col_step++)
                     {
                         //A.matr[row, col_step] = Math.Round(A.matr[row, col_step] - X * A.matr[row_step, col_step]);
                         //A.matr[row, col_step] = Math.Round(A.matr[row, col_step] - X * A.matr[row_step, col_step],2);
-                        A.matr[row, col_step] = A.matr[row, col_step] - X * A.matr[row_step, col_step];
+                        Acopy.matr[row, col_step] = Acopy.matr[row, col_step] - X * Acopy.matr[row_step, col_step];
                     }
 
                     // Процесс Гаусса поэтапно
                     //
-                    //A.show();
+                    //Acopy.show();
                     //Console.WriteLine();
 
                 }
@@ -82,11 +107,45 @@ namespace ConsoleApp1
 
             for (int i = 0; i < A.n; i++)
             {
-                result *= A.matr[i, i];
+                result *= Acopy.matr[i, i];
             }
 
-            return result;
+            return result * Math.Pow(-1,countOfSwap);
+
         }
+
+        //public static double DetRecur(SqMatrix A)
+        //{
+        //    SqMatrix Acopy = new SqMatrix(A.n);
+        //    MatrixCopy(A.matr, Acopy.matr, A.n, A.n);
+
+        //    if (A.n == 1) { return Acopy.matr[0, 0]; }
+
+        //    else if (A.n == 2)
+        //    {
+        //        return ((Acopy.matr[0, 0] * Acopy.matr[1, 1]) - (Acopy.matr[0, 1] * Acopy.matr[1, 0]));
+        //    }
+
+        //    else if (A.n == 3)
+        //    {
+        //        return (
+        //            (Acopy.matr[0, 0] * Acopy.matr[1, 1] * Acopy.matr[2, 2]) + (Acopy.matr[0, 1] * Acopy.matr[1, 2] * Acopy.matr[2, 0]) + (Acopy.matr[0, 2] * Acopy.matr[1, 0] * Acopy.matr[2, 1]) -
+        //            (Acopy.matr[0, 2] * Acopy.matr[1, 1] * Acopy.matr[2, 0]) - (Acopy.matr[0, 0] * Acopy.matr[1, 2] * Acopy.matr[2, 1]) - (Acopy.matr[0, 1] * Acopy.matr[1, 0] * Acopy.matr[2, 2])
+        //            );
+        //    }
+
+        //    else
+        //    {
+
+        //        double result = 1;
+
+        //        for (int i = 0; i < A.n; i++)
+        //        {
+        //            result *= Math.Pow(-1, (i + 0))
+        //        }
+
+        //    }
+        //}
 
 
         // В этой функции нет необходимости, т.к можно
@@ -94,6 +153,10 @@ namespace ConsoleApp1
         // я её создал лишь для работы без участия
         public static double Det(double[,] A, int n)
         {
+
+            double[,] ArrayTemp = new double[n, n];
+            MatrixCopy(A, ArrayTemp, n, n);
+
             int row_step = 0; // используется как ID строки относительно которой ведутся преобразования
 
             for (int col = 0; col < n - 1; col++) // перебор всех колонок
@@ -103,13 +166,13 @@ namespace ConsoleApp1
                 {
 
                     // a[row_step, col] * X - a[row, col] = 0    => a[row_step, col] * X = a[row, col]     x = a[row, col] / a[row_step, col]
-                    double X = A[row, col] / A[row_step, col];
+                    double X = ArrayTemp[row, col] / ArrayTemp[row_step, col];
 
                     for (int col_step = col; col_step < n; col_step++)
                     {
                         //A.matr[row, col_step] = Math.Round(A.matr[row, col_step] - X * A.matr[row_step, col_step]);
                         //A.matr[row, col_step] = Math.Round(A.matr[row, col_step] - X * A.matr[row_step, col_step],2);
-                        A[row, col_step] = A[row, col_step] - X * A[row_step, col_step];
+                        ArrayTemp[row, col_step] = ArrayTemp[row, col_step] - X * ArrayTemp[row_step, col_step];
                     }
 
                     // Процесс Гаусса поэтапно
@@ -126,7 +189,7 @@ namespace ConsoleApp1
 
             for (int i = 0; i < n; i++)
             {
-                result *= A[i, i];
+                result *= ArrayTemp[i, i];
             }
 
             return result;
