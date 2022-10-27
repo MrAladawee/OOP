@@ -7,6 +7,7 @@ using ConsoleApp1;
 Console.WriteLine("Введите размерность матрицы: ");
 int n = Convert.ToInt32(Console.ReadLine());
 int m = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine();
 
 Matrix mass_1 = new Matrix(n, m);
 Matrix mass_2 = new Matrix(n, m);
@@ -102,18 +103,31 @@ SqMatrix.Lin(sqmass_2).show();
 Console.WriteLine();
 
 InverseMatrix inmass_1 = new InverseMatrix(n);
+InverseMatrix inmass_2 = new InverseMatrix(n);
+
+inmass_1.matr[0,0] = 3;
+inmass_1.matr[0,1] = 4;
+inmass_1.matr[0,2] = 1;
+
+inmass_1.matr[1,0] = 7;
+inmass_1.matr[1,1] = 3;
+inmass_1.matr[1,2] = 7;
+
+inmass_1.matr[2,0] = 7;
+inmass_1.matr[2,1] = 8;
+inmass_1.matr[2,2] = 4;
+
 Console.WriteLine("Квадратная Обратимая матрица A'': ");
 inmass_1.show();
+Console.WriteLine();
+
 Console.WriteLine("Определитель |A''| = {0}", SqMatrix.Det(inmass_1));
 Console.WriteLine();
 
-//InverseMatrix.Inverse(inmass_1).show();
-Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 0, 0));
-Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 0, 1));
-Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 0, 2));
-Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 1, 0));
-Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 1, 1));
-Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 1, 2));
-Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 2, 0));
-Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 2, 1));
-Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 2, 2));
+Console.WriteLine("Обратная матрица к A'': ");
+InverseMatrix inmass_1Inverse = InverseMatrix.Inverse(inmass_1);
+inmass_1Inverse.show();
+Console.WriteLine();
+
+Console.WriteLine("Проверка корректности обратной матрицы к A'': ");
+InverseMatrix.CheckInverse(inmass_1, inmass_1Inverse).show();
