@@ -96,26 +96,43 @@ namespace ConsoleApp1
 
         public static InverseMatrix Inverse(InverseMatrix A)
         {
-            double determinante = SqMatrix.Det(A);
-            double[,] attachedMatr = new double[A.n, A.n];
 
-            for (int i = 0; i < A.n; i++)
+            InverseMatrix Acopy = new InverseMatrix(A.n);
+
+            MatrixCopy(A.matr, Acopy.matr, A.n, A.n);
+
+            double determinante = SqMatrix.Det(Acopy);
+            double[,] attachedMatr = new double[Acopy.n, Acopy.n];
+
+            for (int i = 0; i < Acopy.n; i++)
             {
-                for (int j = 0; j < A.n; j++)
+                for (int j = 0; j < Acopy.n; j++)
                 {
-                    attachedMatr[i, j] = AttachedMinor(A.matr, A.n, i, j);
+                    attachedMatr[i, j] = AttachedMinor(Acopy.matr, Acopy.n, i, j);
                 }
             }
 
-            Array.Copy(attachedMatr, A.matr, A.n);
+            MatrixCopy(attachedMatr, Acopy.matr, Acopy.n, Acopy.n);
 
-            Matrix.Transp(A);
+            Acopy.matr = Transp(Acopy).matr;
 
-            double coef = 1.0; // determinante;
+            double coef = 1 / determinante;
+            Console.WriteLine();
 
-            A.matr = Matrix.multiplyVal(A.matr, A.n, A.n, coef);
+            Acopy.matr = Matrix.multiplyVal(Acopy.matr, A.n, A.n, coef);
 
-            return A;
+            return Acopy;
+        }
+
+        public static InverseMatrix CheckInverse(InverseMatrix A, InverseMatrix AInverse)
+        {
+
+            InverseMatrix Result = new InverseMatrix(A.n);
+
+            Result.matr = multiplyMtx(A, AInverse).matr;
+
+            return Result;
+
         }
 
     }
