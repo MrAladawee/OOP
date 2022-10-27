@@ -8,9 +8,9 @@ namespace ConsoleApp1
 {
     public class Matrix
     {
-        private int n;
-        private int m;
-        private double[,] matr;
+        public int n;
+        public int m;
+        public double[,] matr;
 
         // Random initialization
         public Matrix(int n = 0, int m = 0, bool Zero = false)
@@ -76,6 +76,18 @@ namespace ConsoleApp1
             {
                 for (int j = 0; j < this.m; j++)
                 {
+                    Console.Write("{0}\t", this.matr[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public void show(Matrix A)
+        {
+            for (int i = 0; i < this.n; i++)
+            {
+                for (int j = 0; j < this.m; j++)
+                {
                     Console.Write("{0} ", this.matr[i, j]);
                 }
                 Console.WriteLine();
@@ -83,7 +95,7 @@ namespace ConsoleApp1
         }
 
         // Multiplication matrix A by value
-        public static Matrix multiplyVal(Matrix A, int value)
+        public static Matrix multiplyVal(Matrix A, double value)
         {
             Matrix Result = new Matrix(A.n, A.m);
 
@@ -92,6 +104,21 @@ namespace ConsoleApp1
                 for (int j = 0; j < A.m; j++)
                 {
                     Result.matr[i, j] = A.matr[i, j]*value;
+                }
+            }
+
+            return Result;
+        }
+
+        public static double[,] multiplyVal(double[,] A, int size_row, int size_col, double value)
+        {
+            double[,] Result = new double[size_row, size_col];
+
+            for (int i = 0; i < size_row; i++)
+            {
+                for (int j = 0; j < size_col; j++)
+                {
+                    Result[i, j] = A[i, j] * value;
                 }
             }
 
