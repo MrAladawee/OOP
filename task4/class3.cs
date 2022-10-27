@@ -42,10 +42,10 @@ namespace ConsoleApp1
                 }
             }
 
-            //if (SqMatrix.Det(matr,n) == 0)
-            //{
-            //    matr = SqMatrix.Lin(matr, n);
-            //}
+            if (SqMatrix.Det(matr,n) == 0)
+            {
+                matr = SqMatrix.Lin(matr, n);
+            }
 
             this.matr = matr;
         }
