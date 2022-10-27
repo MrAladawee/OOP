@@ -1,6 +1,5 @@
 using ConsoleApp1;
 
-
 //
 // Initialization part
 //
@@ -18,6 +17,9 @@ int j = Convert.ToInt32(Console.ReadLine());
 
 Matrix mass_3 = new Matrix(i, j);
 
+//
+//
+//
 Matrix mass1 = new Matrix(n, m);
 Matrix mass2 = new Matrix(n, m);
 Matrix mass3 = new Matrix(n, m);
@@ -30,8 +32,6 @@ Matrix mass9 = new Matrix(n, m);
 Matrix mass10 = new Matrix(n, m);
 Matrix mass11 = new Matrix(n, m);
 Matrix mass12 = new Matrix(n, m);
-
-Console.WriteLine(); Console.WriteLine();
 
 
 //
@@ -73,7 +73,47 @@ mass5 = Matrix.Transp(mass_3);
 mass5.show();
 Console.WriteLine();
 
-Console.WriteLine("Вывод конкретного элемента по индексу:");
-int index_n = Convert.ToInt32(Console.ReadLine());
-int index_m = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine(String.Concat("Полученный элемент: ", Matrix.Recieve(mass11, index_n, index_m)));
+//Console.WriteLine("Вывод конкретного элемента по индексу:");
+//int index_n = Convert.ToInt32(Console.ReadLine());
+//int index_m = Convert.ToInt32(Console.ReadLine());
+//Console.WriteLine(String.Concat("Полученный элемент: ", Matrix.Recieve(mass_1, index_n, index_m)));
+
+
+//
+//
+//
+
+SqMatrix sqmass_1 = new SqMatrix(n);
+SqMatrix sqmass_2 = new SqMatrix(n, true);
+
+Console.WriteLine("Квадратная Матрица А': ");
+sqmass_1.show();
+Console.WriteLine();
+
+Console.WriteLine("Квадратная Матрица B': ");
+sqmass_2.show();
+Console.WriteLine();
+
+Console.WriteLine("Определитель |A'| = {0}", SqMatrix.Det(sqmass_1));
+Console.WriteLine();
+
+Console.WriteLine("Исправление линейной зависимости в матрице B:");
+SqMatrix.Lin(sqmass_2).show();
+Console.WriteLine();
+
+InverseMatrix inmass_1 = new InverseMatrix(n);
+Console.WriteLine("Квадратная Обратимая матрица A'': ");
+inmass_1.show();
+Console.WriteLine("Определитель |A''| = {0}", SqMatrix.Det(inmass_1));
+Console.WriteLine();
+
+//InverseMatrix.Inverse(inmass_1).show();
+Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 0, 0));
+Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 0, 1));
+Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 0, 2));
+Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 1, 0));
+Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 1, 1));
+Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 1, 2));
+Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 2, 0));
+Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 2, 1));
+Console.WriteLine(InverseMatrix.AttachedMinor(inmass_1.matr, inmass_1.n, 2, 2));
