@@ -12,23 +12,24 @@ namespace CreditCalculator
 {
     public partial class Form2 : Form
     {
-
-
-        public Form2()
+        public Form2(Color color)
         {
             InitializeComponent();
 
             Form1 form1 = new Form1();
 
-            if (form1.BackColor == DefaultBackColor)
+            if (color == DefaultBackColor)
             {
                 this.BackColor = DefaultBackColor;
                 this.BackgroundImage = Image.FromFile(@"BackGr/ResultWhite.jpg");
+                dataGridView1.BackgroundColor = Color.White;
             }
-            else if (form1.BackColor == Color.Black)
+
+            else
             {
                 this.BackColor = Color.Black;
                 this.BackgroundImage = Image.FromFile(@"BackGr/ResultBlack.jpg");
+                dataGridView1.BackgroundColor = Color.Black;
 
                 foreach (Label label in Controls.OfType<Label>())
                 {
