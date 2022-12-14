@@ -2,7 +2,6 @@ namespace CreditCalculator
 {
     public partial class Form1 : Form
     {
-
         Dictionary<int, int> data = new Dictionary<int, int>()
         {
             { 0, 31 },
@@ -57,13 +56,16 @@ namespace CreditCalculator
                     label.ForeColor = Color.White;
                 }
 
+
                 foreach (TrackBar trackBar in Controls.OfType<TrackBar>())
                 {
                     trackBar.BackColor = Color.Black;
                 }
 
+                Form2 form2 = new Form2(Color.Black);
+
             }
-            
+
             else if (this.BackColor == Color.Black)
             {
                 this.BackColor = DefaultBackColor;
@@ -79,6 +81,8 @@ namespace CreditCalculator
                 {
                     trackBar.BackColor = Color.White;
                 }
+
+                Form2 form2 = new Form2(DefaultBackColor);
 
             }
         }
@@ -109,11 +113,10 @@ namespace CreditCalculator
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2();
-            
+            Form2 form2 = new Form2(this.BackColor);
 
             double sum = Convert.ToDouble(trackBar1.Value);          // Сумма кредитования
-            double percent = Math.Round(Convert.ToDouble(trackBar2.Value) / (12*100),2); // Ежемесячный процент от годовой ставки
+            double percent = Convert.ToDouble(trackBar2.Value) / (12*100); // Ежемесячный процент от годовой ставки
             double percent_ = Convert.ToDouble(trackBar2.Value); // Ежемесячный процент от годовой ставки
             int time = Convert.ToInt32(trackBar3.Value);             // Время кредитования
 
@@ -209,7 +212,7 @@ namespace CreditCalculator
                 }
             }
 
-            form2.label7.Text = sum_of_payment_annuity.ToString();
+            form2.label7.Text = Math.Round(sum_of_payment_annuity,2).ToString();
             form2.label4.Text = Math.Round((-Convert.ToDouble(trackBar1.Value) + sum_of_payment_annuity),2).ToString();
 
             form2.ShowDialog();
