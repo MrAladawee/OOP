@@ -42,14 +42,12 @@ namespace CreditCalculator
             label2.Text = "Полная сумма выплат:";
             label3.Text = "Переплата:";
 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
             dataGridView1.Columns[0].HeaderText = "Аннуитетный платеж";
             dataGridView1.Columns[1].HeaderText = "Платеж по процентам";
             dataGridView1.Columns[2].HeaderText = "Платеж по кредиту";
             dataGridView1.Columns[3].HeaderText = "Остаток";
-
-            DataGridViewCellStyle style = dataGridView1.ColumnHeadersDefaultCellStyle;
-            style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
 
         }
 
